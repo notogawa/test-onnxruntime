@@ -8,12 +8,12 @@ jobs:
       - run:
           command: |
             apt-get update
-            apt-get install -y python3-pip wget
+            apt-get install -y python3-pip python3-numpy wget
             pip3 install onnxruntime
       - run:
           command: |
             wget --progress=dot 'https://s3.amazonaws.com/download.onnx/models/opset_8/shufflenet.tar.gz'
-            tar --no-same-owner xvzf shufflenet.tar.gz
+            tar xvzf shufflenet.tar.gz --no-same-ownera
       - run:
           command: |
             python3 shufflenet.py | tee shufflenet.log.1
