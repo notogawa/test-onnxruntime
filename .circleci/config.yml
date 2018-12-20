@@ -13,7 +13,7 @@ jobs:
       - run:
           command: |
             wget --progress=dot 'https://s3.amazonaws.com/download.onnx/models/opset_8/shufflenet.tar.gz'
-            tar xvzf shufflenet.tar.gz --no-same-ownera
+            tar xvzf shufflenet.tar.gz --no-same-owner
       - run:
           command: |
             python3 shufflenet.py | tee shufflenet.log.1
