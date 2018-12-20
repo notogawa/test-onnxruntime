@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+          command: |
+            apt-get update
+            apt-get install python3-pip
+            pip3 install onnxruntime
+      - run:
+          command: |
+            wget --progress=dot 'https://s3.amazonaws.com/download.onnx/models/opset_8/shufflenet.tar.gz'
+            tar xvzf shufflenet.tar.gz
+      - run:
+          command: |
+            python3 shufflenet.py | tee shufflenet.log.1
+            python3 shufflenet.py | tee shufflenet.log.2
+            diff shufflenet.log.1 shufflenet.log.2
